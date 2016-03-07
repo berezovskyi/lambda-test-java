@@ -1,1 +1,8 @@
 language: java
+script:
+  - mvn test
+  - mvn package
+jdk:
+  - oraclejdk8
+  - oraclejdk7
+  - openjdk7
