@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>testlambda</groupId>
   <artifactId>testlambda</artifactId>
-  <version>0.0.5-SNAPSHOT</version>
+  <version>0.0.6-SNAPSHOT</version>
   <dependencies>
   	<dependency>
   		<groupId>com.amazonaws</groupId>
@@ -41,6 +41,9 @@
             <goals>
               <goal>shade</goal>
             </goals>
+            <configuration>
+            	<minimizeJar>true</minimizeJar>
+            </configuration>
           </execution>
         </executions>
       </plugin>
