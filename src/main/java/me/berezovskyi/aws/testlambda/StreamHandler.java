@@ -30,21 +30,15 @@ public class StreamHandler {
         if (element.isJsonObject()) {
             JsonObject req = element.getAsJsonObject();
             String operation = req.get("operation").getAsString();
-            String tableName = req.get("tableName").getAsString(); // TODO if exists
+            String tableName = req.get("tableName").getAsString();  // TODO if exists
             
             Table table = dynamoDB.getTable(tableName);
             
             JsonObject payload = req.get("payload").getAsJsonObject();
             
             if(operation == "create") {
-            	table.putItem(Item.fromJSON(payload.toString())); //let's see how bad does it go
+            	table.putItem(Item.fromJSON(payload.toString()));  // how bad can it be? }:)
             }
-            
-//            JsonArray datasets = operation.getAsJsonArray("dataset");
-//            for (int i = 0; i < datasets.size(); i++) {
-//                JsonObject dataset = datasets.get(i).getAsJsonObject();
-//                System.out.println(dataset.get("album_title").getAsString());
-//            }
         }
     }
 }
