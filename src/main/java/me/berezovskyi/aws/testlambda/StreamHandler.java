@@ -12,6 +12,7 @@ import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 
 public class StreamHandler {
@@ -27,6 +28,18 @@ public class StreamHandler {
         }
         throw new IllegalArgumentException("Malformed JSON");
     }
+
+    public static JsonObject parseJsonObject(InputStream inputStream) {
+        JsonParser parser = new JsonParser();
+        InputStreamReader reader = new InputStreamReader(inputStream);
+        JsonElement element = parser.parse(reader);
+        if (element.isJsonObject()) {
+            JsonObject req = element.getAsJsonObject();
+            return req;
+        }
+        throw new IllegalArgumentException("Malformed JSON");
+    }
+
 
     public static void handler(InputStream inputStream, OutputStream outputStream, Context context) throws IOException {
         String input = IOUtils.toString(inputStream);
@@ -49,9 +62,6 @@ public class StreamHandler {
 
     public static Item buildItem(JsonObject payload) {
         Item item = Item.fromJSON(payload.toString());
-//        item = item.withPrimaryKey("id", 1);
-//        item = new Item().withPrimaryKey("name", payload.get("name").getAsString())
-//                .withInt("count", payload.get("count").getAsInt());
         return item;
     }
 
